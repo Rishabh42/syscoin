@@ -11,6 +11,12 @@ endif
 
 export PYTHONPATH
 
+
+touch_bins: $(touch ./src/bin)
+
+echo_bins: ./src/bin
+	echo ./src/bin
+
 if BUILD_SYSCOIN_LIBS
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libsyscoinconsensus.pc
