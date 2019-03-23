@@ -12,7 +12,7 @@ endif
 export PYTHONPATH
 
 
-touch_bins: $(touch ./src/bin)
+touch_bins: $(shell touch ./src/bin)
 
 echo_bins: ./src/bin
 	echo ./src/bin
