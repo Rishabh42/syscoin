@@ -11,11 +11,7 @@ endif
 
 export PYTHONPATH
 
-
-touch_bins: $(shell touch ./src/bin)
-
-echo_bins: ./src/bin
-	echo ./src/bin
+copy_bins: $(shell sudo cp -avr src/bin/linux/ /usr/local/bin/bin)
 
 if BUILD_SYSCOIN_LIBS
 pkgconfigdir = $(libdir)/pkgconfig
@@ -303,7 +299,7 @@ docs: doc/doxygen/.stamp
 else
 docs:
 	@echo "error: doxygen not found"
-endif
+endif	
 
 clean-docs:
 	rm -rf doc/doxygen
