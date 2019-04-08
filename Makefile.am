@@ -11,7 +11,9 @@ endif
 
 export PYTHONPATH
 
-copy_bins: $(shell sudo cp -avr src/bin/linux/ /usr/local/bin/bin)
+#copy_bins: $(shell sudo cp -avr src/bin/linux/ /usr/local/bin/bin)
+/src/linux/: $(shell cp -avr /src/bin/linux /src/linux/)
+
 
 if BUILD_SYSCOIN_LIBS
 pkgconfigdir = $(libdir)/pkgconfig
@@ -90,7 +92,7 @@ $(OSX_APP)/Contents/PkgInfo:
 
 $(OSX_APP)/Contents/Resources/empty.lproj:
 	$(MKDIR_P) $(@D)
-	@touch $@ 
+	@touch $@
 
 $(OSX_APP)/Contents/Info.plist: $(OSX_PLIST)
 	$(MKDIR_P) $(@D)
@@ -299,7 +301,7 @@ docs: doc/doxygen/.stamp
 else
 docs:
 	@echo "error: doxygen not found"
-endif	
+endif
 
 clean-docs:
 	rm -rf doc/doxygen
@@ -307,4 +309,3 @@ clean-docs:
 clean-local: clean-docs
 	rm -rf coverage_percent.txt test_syscoin.coverage/ total.coverage/ test/tmp/ cache/ $(OSX_APP)
 	rm -rf test/functional/__pycache__ test/functional/test_framework/__pycache__ test/cache
-
