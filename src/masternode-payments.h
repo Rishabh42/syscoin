@@ -24,7 +24,6 @@ static const int MNPAYMENTS_SIGNATURES_TOTAL            = 10;
 //  vote for masternode and be elected as a payment winner
 // V1 - Last protocol version before update
 // V2 - Newest protocol version
-static const int MIN_MASTERNODE_PAYMENT_PROTO_VERSION_1 = 70206;
 static const int MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 = MIN_PEER_PROTO_VERSION;
 
 extern CCriticalSection cs_vecPayees;
@@ -100,7 +99,7 @@ public:
         READWRITE(vecPayees);
     }
 
-    void AddPayee(const CMasternodePaymentVote& vote);
+    void AddPayee(const CMasternodePaymentVote& vote, CConnman& connman);
     bool GetBestPayee(CScript& payeeRet) const;
 	bool GetBestPayee(CScript& payeeRet, int &nStartHeightBlock) const;
     bool HasPayeeWithVotes(const CScript& payeeIn, int nVotesReq, CMasternodePayee& payee) const;
@@ -201,7 +200,7 @@ public:
 
     void Clear();
 
-    bool AddOrUpdatePaymentVote(const CMasternodePaymentVote& vote);
+    bool AddOrUpdatePaymentVote(const CMasternodePaymentVote& vote, CConnman& connman);
     bool HasVerifiedPaymentVote(const uint256& hashIn) const;
     bool ProcessBlock(int nBlockHeight, CConnman& connman);
     void CheckBlockVotes(int nBlockHeight);

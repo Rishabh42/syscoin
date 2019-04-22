@@ -21,7 +21,7 @@ struct PaymentAmount
 void SendSnapShotPayment(const std::string &strSend, const std::string &asset, const std::string &alias, const std::string &memo)
 {
 	currentTx++;
-	std::string strSendMany = "assetsend " + asset + " " + strSend + "}]\" " + memo + " ''";
+	std::string strSendMany = "assetsendmany " + asset + " " + strSend + "}]\" " + memo + " ''";
 	UniValue r;
 	BOOST_CHECK_THROW(r = CallRPC("mainnet1", strSendMany, false), runtime_error);
 }
@@ -33,7 +33,7 @@ void GenerateAirDrop(const std::vector<PaymentAmount> &paymentAmounts, const CAm
 	string assetName = "asset";
 	string aliasName = "alias";
 	string memo = assetName+"-AIRDROP";
-	BOOST_CHECK_NO_THROW(r = CallRPC("mainnet1", "assetinfo " + assetName + " true", false));
+	BOOST_CHECK_NO_THROW(r = CallRPC("mainnet1", "assetinfo " + assetName, false));
 
 	if (!find_value(r.get_obj(), "inputs").get_array().empty())
 	{
